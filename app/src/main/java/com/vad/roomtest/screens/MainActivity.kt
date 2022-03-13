@@ -9,11 +9,6 @@ import com.vad.roomtest.room.database.AppDatabase
 
 class MainActivity : AppCompatActivity() {
 
-    val database: AppDatabase by lazy {
-        Room.databaseBuilder(applicationContext, AppDatabase::class.java, "works.db")
-            .build()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
