@@ -7,7 +7,7 @@ import androidx.room.*
 interface DaoWorks {
 
     @Query("SELECT * FROM ${Work.TABLE_NAME}")
-    suspend fun getAllWorks(): LiveData<List<Work>>
+    fun getAllWorks(): LiveData<List<Work>>
 
     @Insert
     suspend fun addWork(work: Work)
