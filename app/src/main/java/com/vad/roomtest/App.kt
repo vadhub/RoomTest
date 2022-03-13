@@ -16,4 +16,10 @@ class App: Application() {
         database.daoWorks()
     }
 
+    companion object {
+        val instance by lazy {
+            App()
+        }
+    }
+
 }
