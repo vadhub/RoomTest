@@ -28,6 +28,7 @@ class DialogAddFragment: DialogFragment() {
         val workPrice = v.findViewById<EditText>(R.id.addWorkPrice)
         v.findViewById<Button>(R.id.btnAdd).setOnClickListener {
             viewModel.addWork(Work(0, work.text.toString(), workPrice.text.toString().toDouble()) )
+           dialog?.dismiss()
         }
         return v
     }
