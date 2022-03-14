@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vad.roomtest.R
 import com.vad.roomtest.room.dao.Work
 
-class AdapterListWorks(private var works: List<Work>): RecyclerView.Adapter<AdapterListWorks.MyViewHolder>() {
+class AdapterListWorks: RecyclerView.Adapter<AdapterListWorks.MyViewHolder>() {
+
+    private var works: List<Work> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setWorks(works: List<Work>) {
