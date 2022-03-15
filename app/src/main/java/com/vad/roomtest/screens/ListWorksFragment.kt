@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +33,11 @@ class ListWorksFragment : Fragment() {
 
         viewModel.getWorks.observe(viewLifecycleOwner) {
             adapterListWorks.setWorks(it)
+        }
+
+        val dialog = DialogAddFragment()
+        v.findViewById<Button>(R.id.addWork).setOnClickListener {
+            activity?.supportFragmentManager?.let { dialog.show(it, "Add work") }
         }
 
         return v
