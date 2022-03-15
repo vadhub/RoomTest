@@ -24,7 +24,7 @@ class DialogAddFragment: DialogFragment() {
     ): View? {
 
         val v: View = inflater.inflate(R.layout.dialog_add_fragment, container, false)
-        val work = v.findViewById<EditText>(R.id.addWork)
+        val work = v.findViewById<EditText>(R.id.addWorkName)
         val workPrice = v.findViewById<EditText>(R.id.addWorkPrice)
         v.findViewById<Button>(R.id.btnAdd).setOnClickListener {
             viewModel.addWork(Work(0, work.text.toString(), workPrice.text.toString().toDouble()) )
