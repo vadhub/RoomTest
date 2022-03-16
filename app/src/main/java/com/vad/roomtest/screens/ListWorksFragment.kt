@@ -5,17 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.vad.roomtest.R
-import com.vad.roomtest.room.dao.Work
 
 class ListWorksFragment : Fragment() {
 
-    private val viewModel by lazy {
-        ViewModelProvider(requireActivity()).get(WorksViewModel::class.java)
+    private val viewModel: WorksViewModel by lazy {
+        val viewModelFactory = ViewModelFactory(requireActivity().application)
+        ViewModelProvider(requireActivity(), viewModelFactory).get(WorksViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -36,7 +38,7 @@ class ListWorksFragment : Fragment() {
         }
 
         val dialog = DialogAddFragment()
-        v.findViewById<Button>(R.id.addWork).setOnClickListener {
+        v.findViewById<FloatingActionButton>(R.id.addWork).setOnClickListener {
             activity?.supportFragmentManager?.let { dialog.show(it, "Add work") }
         }
 
