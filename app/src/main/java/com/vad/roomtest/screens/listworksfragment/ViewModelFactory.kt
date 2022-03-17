@@ -1,4 +1,4 @@
-package com.vad.roomtest.screens
+package com.vad.roomtest.screens.listworksfragment
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

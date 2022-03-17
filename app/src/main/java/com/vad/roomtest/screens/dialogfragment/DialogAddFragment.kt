@@ -1,4 +1,4 @@
-package com.vad.roomtest.screens
+package com.vad.roomtest.screens.dialogfragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,15 +7,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import com.vad.roomtest.R
 import com.vad.roomtest.room.dao.Work
+import com.vad.roomtest.screens.listworksfragment.WorksViewModel
 
-class DialogAddFragment: DialogFragment() {
-
-    private val viewModel by lazy {
-        ViewModelProvider(requireActivity()).get(WorksViewModel::class.java)
-    }
+class DialogAddFragment(private val viewModel: WorksViewModel): DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

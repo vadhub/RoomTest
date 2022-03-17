@@ -1,11 +1,10 @@
-package com.vad.roomtest.screens
+package com.vad.roomtest.screens.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 
 import com.vad.roomtest.R
-import com.vad.roomtest.room.database.AppDatabase
+import com.vad.roomtest.screens.listworksfragment.ListWorksFragment
 
 class MainActivity : AppCompatActivity() {
 
