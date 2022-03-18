@@ -7,7 +7,7 @@ import androidx.room.*
 interface DaoUsers {
 
     @Query("SELECT * FROM ${User.TABLE_NAME}")
-    fun getAllUsers(): LiveData<List<User>>
+    fun getAllUsers(): LiveData<List<UserAndWork>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(user: User)
