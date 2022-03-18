@@ -8,13 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vad.roomtest.R
 import com.vad.roomtest.room.dao.User
+import com.vad.roomtest.room.dao.UserAndWork
 
 class AdapterUserList: RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
 
-    private var users: List<User> = ArrayList<User>()
+    private var users: List<UserAndWork> = ArrayList<UserAndWork>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setUsers(users: List<User>) {
+    fun setUsers(users: List<UserAndWork>) {
         this.users = users
         notifyDataSetChanged()
     }
@@ -25,8 +26,8 @@ class AdapterUserList: RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolderUsers, position: Int) {
-        holder.userName.text = users.get(position).name
-        holder.workName.text = "rrr"
+        holder.userName.text = users.get(position).user.name
+        holder.workName.text = users.get(position).work.nameWork
     }
 
     override fun getItemCount(): Int {
