@@ -21,7 +21,7 @@ class WorksViewModel(application: Application) : ViewModel() {
     }
 
     fun addWork(work: Work) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             launch {
                 daoWork.addWork(work)
             }
@@ -30,7 +30,7 @@ class WorksViewModel(application: Application) : ViewModel() {
     }
 
     fun deleteWork(work: Work) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             launch {
                 daoWork.deleteWork(work)
             }
@@ -38,7 +38,7 @@ class WorksViewModel(application: Application) : ViewModel() {
     }
 
     fun updateWork(work: Work) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             launch {
                 daoWork.updateWork(work)
             }
