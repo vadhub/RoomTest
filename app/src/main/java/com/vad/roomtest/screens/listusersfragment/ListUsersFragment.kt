@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vad.roomtest.R
+import com.vad.roomtest.screens.dialogfragments.AddUserFragment
 
 class ListUsersFragment : Fragment() {
 
@@ -24,8 +26,14 @@ class ListUsersFragment : Fragment() {
         val recycle = v.findViewById<RecyclerView>(R.id.recyclerUserList)
         val adapter = AdapterUserList()
 
+        recycle.layoutManager = LinearLayoutManager(requireContext())
+        recycle.adapter = adapter
 
+        viewModel.getUsers.observe(viewLifecycleOwner) {
+            adapter.setUsers(it)
+        }
 
+        val dialog = AddUserFragment(viewModel)
         return v
     }
 }
