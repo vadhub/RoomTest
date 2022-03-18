@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.vad.roomtest.R
-import com.vad.roomtest.screens.dialogfragment.DialogAddFragment
+import com.vad.roomtest.screens.dialogfragments.AddWorkFragment
 
 class ListWorksFragment : Fragment() {
 
@@ -36,7 +36,7 @@ class ListWorksFragment : Fragment() {
             adapterListWorks.setWorks(it)
         }
 
-        val dialog = DialogAddFragment(viewModel)
+        val dialog = AddWorkFragment(viewModel)
         v.findViewById<FloatingActionButton>(R.id.addWork).setOnClickListener {
             activity?.supportFragmentManager?.let { dialog.show(it, "Add work") }
         }
