@@ -5,13 +5,12 @@ import androidx.room.Relation
 
 data class UserAndWork(
     @Embedded
-    val work: Work,
+    val user: User,
 
     @Relation(
-        parentColumn = "work_id",
-        entityColumn = "id_work"
+        parentColumn = "id_work",
+        entityColumn = "work_id"
     )
 
-    val user: User
-
+    val work: Work
 )
