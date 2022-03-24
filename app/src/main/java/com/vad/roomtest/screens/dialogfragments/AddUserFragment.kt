@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -28,6 +30,18 @@ class AddUserFragment(private val viewModel: UsersViewModel) : DialogFragment() 
 
         val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, works.toArray())
         spinner.adapter = arrayAdapter
+        spinner.setSelection(1)
+        spinner.onItemSelectedListener = object: OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                println(p2)
+                println(works.get(p2))
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+        }
 
         v.findViewById<Button>(R.id.addUserAndWorkBtn).setOnClickListener {
 
