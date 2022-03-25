@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.vad.roomtest.R
 import com.vad.roomtest.screens.dialogfragments.AddUserFragment
 
@@ -34,6 +35,11 @@ class ListUsersFragment : Fragment() {
         }
 
         val dialog = AddUserFragment(viewModel)
+
+        v.findViewById<FloatingActionButton>(R.id.btnAddUser).setOnClickListener {
+            activity?.supportFragmentManager?.let { dialog.show(it, "Add user") }
+        }
+
         return v
     }
 }
