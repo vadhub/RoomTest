@@ -11,12 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.vad.roomtest.R
 import com.vad.roomtest.screens.dialogfragments.AddUserFragment
+import com.vad.roomtest.screens.listworksfragment.ViewModelFactory
+import com.vad.roomtest.screens.listworksfragment.WorksViewModel
 
 class ListUsersFragment : Fragment() {
 
     private val viewModel by lazy {
         val viewModelFactory = UserViewModelFactory(requireActivity().application)
         ViewModelProvider(requireActivity(), viewModelFactory).get(UsersViewModel::class.java)
+    }
+
+    private val viewModelWorks by lazy {
+        val viewModelFactory = ViewModelFactory(requireActivity().application)
+        ViewModelProvider(requireActivity(), viewModelFactory).get(WorksViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -34,7 +41,7 @@ class ListUsersFragment : Fragment() {
             adapter.setUsers(it)
         }
 
-        val dialog = AddUserFragment(viewModel)
+        val dialog = AddUserFragment(viewModel, viewModelWorks)
 
         v.findViewById<FloatingActionButton>(R.id.btnAddUser).setOnClickListener {
             activity?.supportFragmentManager?.let { dialog.show(it, "Add user") }

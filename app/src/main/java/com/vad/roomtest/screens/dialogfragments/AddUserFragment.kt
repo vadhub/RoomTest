@@ -12,8 +12,9 @@ import android.widget.Spinner
 import androidx.fragment.app.DialogFragment
 import com.vad.roomtest.R
 import com.vad.roomtest.screens.listusersfragment.UsersViewModel
+import com.vad.roomtest.screens.listworksfragment.WorksViewModel
 
-class AddUserFragment(private val viewModel: UsersViewModel) : DialogFragment() {
+class AddUserFragment(private val viewModel: UsersViewModel, private val viewModelWorks: WorksViewModel) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,13 +25,15 @@ class AddUserFragment(private val viewModel: UsersViewModel) : DialogFragment() 
         val spinner = v.findViewById<Spinner>(R.id.workListSpinner)
         var works = ArrayList<String>()
 
-        viewModel.getUsers.observe(viewLifecycleOwner) {
-            works = it.map { it.work.nameWork } as ArrayList<String>
+        viewModelWorks.getWorks.observe(viewLifecycleOwner) {
+            works = it.map { it.nameWork } as ArrayList<String>
         }
 
         val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, works.toArray())
         spinner.adapter = arrayAdapter
         spinner.setSelection(1)
+
+        println(works.toString())
         spinner.onItemSelectedListener = object: OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 println(p2)
@@ -44,7 +47,7 @@ class AddUserFragment(private val viewModel: UsersViewModel) : DialogFragment() 
         }
 
         v.findViewById<Button>(R.id.addUserAndWorkBtn).setOnClickListener {
-
+            dialog?.dismiss()
         }
 
         return v
