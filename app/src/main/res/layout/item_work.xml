@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:weightSum="2">
+    android:weightSum="3">
 
     <TextView
         android:id="@+id/workName"
@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.4"
         android:gravity="center"
+        android:layout_gravity="center"
         android:textSize="20sp"
         android:text="workname" />
 
@@ -17,10 +18,20 @@
         android:id="@+id/workPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.6"
+        android:layout_weight="1.4"
         android:gravity="center"
+        android:layout_gravity="center"
         android:textSize="20sp"
         android:text="price"
+        />
+
+    <ImageView
+        android:id="@+id/imageButtonWork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_baseline_more_vert_24"
+        android:layout_weight="0.2"
         />
 
 </LinearLayout>
