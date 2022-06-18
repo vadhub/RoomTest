@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_add_24"
         android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="20dp"
         android:contentDescription="add user"
         />
 </FrameLayout>

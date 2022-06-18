@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vad.roomtest.R
@@ -12,7 +15,7 @@ import com.vad.roomtest.room.dao.UserAndWork
 
 class AdapterUserList: RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
 
-    private var users: List<UserAndWork> = ArrayList<UserAndWork>()
+    private var users: List<UserAndWork> = ArrayList()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setUsers(users: List<UserAndWork>) {
@@ -28,6 +31,20 @@ class AdapterUserList: RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
     override fun onBindViewHolder(holder: ViewHolderUsers, position: Int) {
         holder.userName.text = users.get(position).user.name
         holder.workName.text = users.get(position).work.nameWork
+
+        holder.imageBtn.setOnClickListener { v ->
+            val popup = PopupMenu(v.context, holder.imageBtn)
+            popup.inflate(R.menu.option_menu_items)
+            popup.setOnMenuItemClickListener {
+                return@setOnMenuItemClickListener when(it.itemId) {
+                    R.id.optDelete -> true
+                    R.id.optUpdate -> true
+                    else -> false
+                }
+            }
+            popup.show()
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -35,7 +52,10 @@ class AdapterUserList: RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
     }
 
     class ViewHolderUsers(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val userName = itemView.findViewById<TextView>(R.id.userNameText)
-        val workName = itemView.findViewById<TextView>(R.id.workNameText)
+        val userName: TextView = itemView.findViewById(R.id.userNameText)
+        val workName: TextView = itemView.findViewById(R.id.workNameText)
+
+        val imageBtn: ImageView = itemView.findViewById(R.id.imageButtonUser)
+
     }
 }

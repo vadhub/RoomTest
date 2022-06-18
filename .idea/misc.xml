@@ -6,12 +6,14 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3242753623188406" />
         <entry key="app/src/main/res/layout/blank_fragment.xml" value="0.32653985507246375" />
         <entry key="app/src/main/res/layout/dialog_add_fragment.xml" value="0.32653985507246375" />
+        <entry key="app/src/main/res/layout/dialog_add_user.xml" value="0.34103260869565216" />
         <entry key="app/src/main/res/layout/fragment_add_user.xml" value="0.3401268115942029" />
         <entry key="app/src/main/res/layout/fragment_list_users.xml" value="0.3401268115942029" />
         <entry key="app/src/main/res/layout/fragment_list_works.xml" value="0.32653985507246375" />
         <entry key="app/src/main/res/layout/item_user.xml" value="0.3401268115942029" />
         <entry key="app/src/main/res/layout/item_work.xml" value="0.32653985507246375" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/option_menu_items.xml" value="0.3880208333333333" />
       </map>
     </option>
   </component>

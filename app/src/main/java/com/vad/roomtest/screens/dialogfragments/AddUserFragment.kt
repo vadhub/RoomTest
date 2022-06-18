@@ -18,7 +18,7 @@ class AddUserFragment(private val viewModel: UsersViewModel, private val viewMod
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v = inflater.inflate(R.layout.fragment_add_user, container, false)
+        val v = inflater.inflate(R.layout.dialog_add_user, container, false)
         var idWork = 0
         val spinner = v.findViewById<Spinner>(R.id.workListSpinner)
         val nameText = v.findViewById<EditText>(R.id.nameUser)
@@ -41,11 +41,10 @@ class AddUserFragment(private val viewModel: UsersViewModel, private val viewMod
                 }
             }
 
-            println(idWork)
-
             v.findViewById<Button>(R.id.addUserAndWorkBtn).setOnClickListener {
-                dialog?.dismiss()
+                println(idWork)
                 viewModel.addUser(User(0, nameText.text.toString(), idWork))
+                dialog?.dismiss()
             }
 
         }
