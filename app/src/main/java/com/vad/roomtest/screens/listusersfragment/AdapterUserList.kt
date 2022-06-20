@@ -13,7 +13,7 @@ import com.vad.roomtest.R
 import com.vad.roomtest.room.dao.User
 import com.vad.roomtest.room.dao.UserAndWork
 
-class AdapterUserList: RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
+class AdapterUserList(private val viewModel: UsersViewModel): RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
 
     private var users: List<UserAndWork> = ArrayList()
 
@@ -37,7 +37,10 @@ class AdapterUserList: RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
             popup.inflate(R.menu.option_menu_items)
             popup.setOnMenuItemClickListener {
                 return@setOnMenuItemClickListener when(it.itemId) {
-                    R.id.optDelete -> true
+                    R.id.optDelete -> {
+                        viewModel.deleteUser(users.get(position).user)
+                        true
+                    }
                     R.id.optUpdate -> true
                     else -> false
                 }

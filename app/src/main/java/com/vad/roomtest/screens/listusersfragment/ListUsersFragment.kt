@@ -21,6 +21,8 @@ class ListUsersFragment : Fragment() {
         ViewModelProvider(requireActivity(), viewModelFactory).get(UsersViewModel::class.java)
     }
 
+    private val adapter by lazy { AdapterUserList(viewModel) }
+
     private val viewModelWorks by lazy {
         val viewModelFactory = ViewModelFactory(requireActivity().application)
         ViewModelProvider(requireActivity(), viewModelFactory).get(WorksViewModel::class.java)
@@ -32,7 +34,6 @@ class ListUsersFragment : Fragment() {
     ): View? {
         val v = inflater.inflate(R.layout.fragment_list_users, container, false)
         val recycle = v.findViewById<RecyclerView>(R.id.recyclerUserList)
-        val adapter = AdapterUserList()
 
         recycle.layoutManager = LinearLayoutManager(requireContext())
         recycle.adapter = adapter

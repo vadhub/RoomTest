@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         bottomNavView = findViewById(R.id.menu_nav)
-
+        currentFragment = ListUsersFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, currentFragment).commit()
         bottomNavView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navUsers -> currentFragment = ListUsersFragment()
