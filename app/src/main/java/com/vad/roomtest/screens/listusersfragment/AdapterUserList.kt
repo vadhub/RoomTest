@@ -13,14 +13,27 @@ import com.vad.roomtest.R
 import com.vad.roomtest.room.dao.User
 import com.vad.roomtest.room.dao.UserAndWork
 
-class AdapterUserList(private val viewModel: UsersViewModel): RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
+class AdapterUserList : RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
 
     private var users: List<UserAndWork> = ArrayList()
+    private var clickOptionMenu: ClickOptionMenu? = null
+
+    fun setOnClickOptionMenu(clickOptionMenu: ClickOptionMenu) {
+        this.clickOptionMenu = clickOptionMenu
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun setUsers(users: List<UserAndWork>) {
         this.users = users
         notifyDataSetChanged()
+    }
+
+    fun getUsers(): List<UserAndWork> {
+        return users
+    }
+
+    interface ClickOptionMenu {
+        fun onClickOptionMenu(view: View, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderUsers {
@@ -32,20 +45,8 @@ class AdapterUserList(private val viewModel: UsersViewModel): RecyclerView.Adapt
         holder.userName.text = users.get(position).user.name
         holder.workName.text = users.get(position).work.nameWork
 
-        holder.imageBtn.setOnClickListener { v ->
-            val popup = PopupMenu(v.context, holder.imageBtn)
-            popup.inflate(R.menu.option_menu_items)
-            popup.setOnMenuItemClickListener {
-                return@setOnMenuItemClickListener when(it.itemId) {
-                    R.id.optDelete -> {
-                        viewModel.deleteUser(users.get(position).user)
-                        true
-                    }
-                    R.id.optUpdate -> true
-                    else -> false
-                }
-            }
-            popup.show()
+        holder.imageBtn.setOnClickListener {
+            clickOptionMenu?.onClickOptionMenu(it, position)
         }
 
     }
@@ -59,6 +60,5 @@ class AdapterUserList(private val viewModel: UsersViewModel): RecyclerView.Adapt
         val workName: TextView = itemView.findViewById(R.id.workNameText)
 
         val imageBtn: ImageView = itemView.findViewById(R.id.imageButtonUser)
-
     }
 }
