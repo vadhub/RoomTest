@@ -13,6 +13,17 @@ import com.vad.roomtest.screens.listworksfragment.WorksViewModel
 
 class AddWorkFragment(private val viewModel: WorksViewModel): DialogFragment() {
 
+    private var isUpdate: Boolean = false
+    private var workId: Int = 0
+
+    fun setUpdate(isUpdate: Boolean) {
+        this.isUpdate = isUpdate
+    }
+
+    fun setWorkId(workId: Int) {
+        this.workId = workId
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,9 +34,15 @@ class AddWorkFragment(private val viewModel: WorksViewModel): DialogFragment() {
         val work = v.findViewById<EditText>(R.id.addWorkName)
         val workPrice = v.findViewById<EditText>(R.id.addWorkPrice)
         v.findViewById<Button>(R.id.btnAdd).setOnClickListener {
-            viewModel.addWork(Work(0, work.text.toString(), workPrice.text.toString().toDouble()) )
-           dialog?.dismiss()
+            if (isUpdate) {
+                viewModel.updateWork(Work(workId, work.text.toString(), workPrice.text.toString().toDouble()))
+            } else {
+                viewModel.addWork(Work(workId, work.text.toString(), workPrice.text.toString().toDouble()) )
+            }
+            dialog?.dismiss()
         }
         return v
     }
+
+
 }

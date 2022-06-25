@@ -1,4 +1,4 @@
-package com.vad.roomtest.screens.listworksfragment
+package com.vad.roomtest.screens.listusersfragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,43 +12,48 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.vad.roomtest.R
 import com.vad.roomtest.screens.ClickOptionMenu
-import com.vad.roomtest.screens.dialogfragments.AddWorkFragment
+import com.vad.roomtest.screens.dialogfragments.AddUserFragment
+import com.vad.roomtest.screens.listworksfragment.ViewModelFactory
+import com.vad.roomtest.screens.listworksfragment.WorksViewModel
 
-class ListWorksFragment : Fragment() {
+class UsersFragment : Fragment() {
 
-    private val viewModel: WorksViewModel by lazy {
+    private val viewModel by lazy {
+        val viewModelFactory = UserViewModelFactory(requireActivity().application)
+        ViewModelProvider(requireActivity(), viewModelFactory).get(UsersViewModel::class.java)
+    }
+
+    private val adapter by lazy { AdapterUserList() }
+
+    private val viewModelWorks by lazy {
         val viewModelFactory = ViewModelFactory(requireActivity().application)
         ViewModelProvider(requireActivity(), viewModelFactory).get(WorksViewModel::class.java)
     }
-
-    private val adapterListWorks by lazy { AdapterListWorks() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val v = inflater.inflate(R.layout.fragment_list_users, container, false)
+        val recycle = v.findViewById<RecyclerView>(R.id.recyclerUserList)
 
-        val v: View = inflater.inflate(R.layout.fragment_list_works, container, false)
-
-        val recycler = v.findViewById<RecyclerView>(R.id.listWorksRecycler)
-
-        recycler.layoutManager = LinearLayoutManager(requireContext())
-        recycler.adapter = adapterListWorks
-
-        adapterListWorks.setOnClickOptionMenu(object : ClickOptionMenu {
+        adapter.setOnClickOptionMenu(object : ClickOptionMenu {
             override fun onClickOptionMenu(view: View, position: Int) {
                 optionMenu(view, position)
             }
-
         })
 
-        viewModel.getWorks.observe(viewLifecycleOwner) {
-            adapterListWorks.setWorks(it)
+        recycle.layoutManager = LinearLayoutManager(requireContext())
+        recycle.adapter = adapter
+
+        viewModel.getUsers.observe(viewLifecycleOwner) {
+            adapter.setUsers(it)
         }
 
-        val dialog = AddWorkFragment(viewModel)
-        v.findViewById<FloatingActionButton>(R.id.addWork).setOnClickListener {
-            activity?.supportFragmentManager?.let { dialog.show(it, "Add work") }
+        val dialog = AddUserFragment(viewModel, viewModelWorks)
+
+        v.findViewById<FloatingActionButton>(R.id.btnAddUser).setOnClickListener {
+            activity?.supportFragmentManager?.let { dialog.show(it, "Add user") }
         }
 
         return v
@@ -60,7 +65,7 @@ class ListWorksFragment : Fragment() {
         popupMenu?.setOnMenuItemClickListener {
             return@setOnMenuItemClickListener when (it.itemId) {
                 R.id.optDelete -> {
-                    viewModel.deleteWork(adapterListWorks.getWorks().get(position))
+                    viewModel.deleteUser(adapter.getUsers().get(position).user)
                     true
                 }
                 R.id.optUpdate -> true
