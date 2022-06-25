@@ -39,19 +39,7 @@ class ListUsersFragment : Fragment() {
 
         adapter.setOnClickOptionMenu(object : ClickOptionMenu {
             override fun onClickOptionMenu(view: View, position: Int) {
-                val popupMenu = context?.let { PopupMenu(it, view) }
-                popupMenu?.inflate(R.menu.option_menu_items)
-                popupMenu?.setOnMenuItemClickListener {
-                    return@setOnMenuItemClickListener when (it.itemId) {
-                        R.id.optDelete -> {
-                            viewModel.deleteUser(adapter.getUsers().get(position).user)
-                            true
-                        }
-                        R.id.optUpdate -> true
-                        else -> false
-                    }
-                }
-                popupMenu?.show()
+                optionMenu(view, position)
             }
         })
 
@@ -69,5 +57,21 @@ class ListUsersFragment : Fragment() {
         }
 
         return v
+    }
+
+    fun optionMenu(view: View, position: Int) {
+        val popupMenu = context?.let { PopupMenu(it, view) }
+        popupMenu?.inflate(R.menu.option_menu_items)
+        popupMenu?.setOnMenuItemClickListener {
+            return@setOnMenuItemClickListener when (it.itemId) {
+                R.id.optDelete -> {
+                    viewModel.deleteUser(adapter.getUsers().get(position).user)
+                    true
+                }
+                R.id.optUpdate -> true
+                else -> false
+            }
+        }
+        popupMenu?.show()
     }
 }
