@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vad.roomtest.R
 import com.vad.roomtest.room.dao.User
 import com.vad.roomtest.room.dao.UserAndWork
+import com.vad.roomtest.screens.ClickOptionMenu
 
 class AdapterUserList : RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() {
 
@@ -30,10 +31,6 @@ class AdapterUserList : RecyclerView.Adapter<AdapterUserList.ViewHolderUsers>() 
 
     fun getUsers(): List<UserAndWork> {
         return users
-    }
-
-    interface ClickOptionMenu {
-        fun onClickOptionMenu(view: View, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderUsers {

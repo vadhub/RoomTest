@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.vad.roomtest.R
+import com.vad.roomtest.screens.ClickOptionMenu
 import com.vad.roomtest.screens.dialogfragments.AddUserFragment
 import com.vad.roomtest.screens.listworksfragment.ViewModelFactory
 import com.vad.roomtest.screens.listworksfragment.WorksViewModel
@@ -36,7 +37,7 @@ class ListUsersFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_list_users, container, false)
         val recycle = v.findViewById<RecyclerView>(R.id.recyclerUserList)
 
-        adapter.setOnClickOptionMenu(object : AdapterUserList.ClickOptionMenu {
+        adapter.setOnClickOptionMenu(object : ClickOptionMenu {
             override fun onClickOptionMenu(view: View, position: Int) {
                 val popupMenu = context?.let { PopupMenu(it, view) }
                 popupMenu?.inflate(R.menu.option_menu_items)
